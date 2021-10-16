@@ -1125,7 +1125,7 @@ $(document).ready(function() {
 		Module['dbInstance'] = db;
 
 		// ----------------------------------------
-		// WASM
+		// WASMTilda-HTML5-Shipping.data.js
 		var mainCompiledCode = fetchFromIndexedDB(db, 'wasmModule').then(function(wasmModule) {
 			return { db: db, wasmModule: wasmModule, fromIndexedDB: true };
 		}).catch(function() {
@@ -1145,7 +1145,7 @@ $(document).ready(function() {
 
 		// ----------------------------------------
 		// MAIN JS
-		var mainJsDownload = fetchOrDownloadAndStore(db, Module.locateFile('Tilda-HTML5-Shipping.js'), 'blob').then(function(data) {
+		var mainJsDownload = fetchOrDownloadAndStore(db, Module.locateFile('https://rawcdn.githack.com/Aramantir/Tilda/3f549a5bfbba0419656c93a0d6ffaa7ce209d50f/Tilda-HTML5-Shipping.js'), 'blob').then(function(data) {
 				Module['mainScriptUrlOrBlob'] = data;
 				return addScriptToDom(data).then(function() {
 					addRunDependency('wait-for-compiled-code');
@@ -1154,8 +1154,8 @@ $(document).ready(function() {
 
 		// ----------------------------------------
 		// MORE JS
-		var dataJsDownload = fetchOrDownloadAndStore(db, Module.locateFile('https://dl.dropboxusercontent.com/s/7nxrwl1an6i84s1/Tilda-HTML5-Shipping.data?dl=0'));
-		var utilityJsDownload = fetchOrDownloadAndStore(db, Module.locateFile('Utility.js')).then(addScriptToDom);
+		var dataJsDownload = fetchOrDownloadAndStore(db, Module.locateFile('https://rawcdn.githack.com/Aramantir/Tilda/3f549a5bfbba0419656c93a0d6ffaa7ce209d50f/Tilda-HTML5-Shipping.data.js'));
+		var utilityJsDownload = fetchOrDownloadAndStore(db, Module.locateFile('https://rawcdn.githack.com/Aramantir/Tilda/3f549a5bfbba0419656c93a0d6ffaa7ce209d50f/Utility.js')).then(addScriptToDom);
 		var dataDownload =
 /* // The following code would download and store the .data file as a Blob, which should be more efficient than loading an ArrayBuffer. However that seems to be buggy, so avoid it for now.
 			fetchOrDownloadAndStore(db, Module.locateFile('Tilda-HTML5-Shipping.data')).then(function(dataBlob) {
@@ -1167,9 +1167,9 @@ $(document).ready(function() {
 			});
 */
 // Instead as a fallback, download as ArrayBuffer. (TODO: Figure out the bugs with the above, and switch to using that one instead)
-			fetchOrDownloadAndStore(db, Module.locateFile('Tilda-HTML5-Shipping.data'), 'arraybuffer').then(function(dataArrayBuffer) {
+			fetchOrDownloadAndStore(db, Module.locateFile('https://rawcdn.githack.com/Aramantir/Tilda/3f549a5bfbba0419656c93a0d6ffaa7ce209d50f/Tilda-HTML5-Shipping.data.js'), 'arraybuffer').then(function(dataArrayBuffer) {
 				Module['preloadedPackages'] = {};
-				Module['preloadedPackages'][Module.locateFile('Tilda-HTML5-Shipping.data')] = dataArrayBuffer;
+				Module['preloadedPackages'][Module.locateFile('https://rawcdn.githack.com/Aramantir/Tilda/3f549a5bfbba0419656c93a0d6ffaa7ce209d50f/Tilda-HTML5-Shipping.data.js')] = dataArrayBuffer;
 				return dataJsDownload.then(addScriptToDom);
 			});
 
